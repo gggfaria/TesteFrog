@@ -1,0 +1,24 @@
+﻿services:
+  testefrogpay.web:
+    image: testefrogpay.web
+    build:
+      context: .
+      dockerfile: TesteFrogpay.Web/Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - "postgres"
+    networks:
+       - testefrogpay-network
+  
+  postgres:
+    container_name: 'postgres'
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: frog
+    networks:
+      - testefrogpay-network
+        
+networks:
+  testefrogpay-network:
+    driver: bridge 
