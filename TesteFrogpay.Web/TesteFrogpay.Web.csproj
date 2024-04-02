@@ -17,4 +17,9 @@
       </Content>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\TesteFrogpay.Domain\TesteFrogpay.Domain.csproj" />
+      <ProjectReference Include="..\TesteFrogpay.Infra\TesteFrogpay.Infra.csproj" />
+    </ItemGroup>
+
 </Project>

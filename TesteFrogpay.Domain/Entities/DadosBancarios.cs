@@ -4,7 +4,7 @@ namespace TesteFrogpay.Domain;
 
 public class DadosBancarios : BaseEntity
 {
-    public DadosBancarios(Guid id, DateTime dataCriacao, string codigo, string agencia, string conta, string digito) : base(id, dataCriacao)
+    public DadosBancarios(Guid id, DateTime dataCriacao, string codigo, string agencia, string conta, string digito) : base(dataCriacao)
     {
         Codigo = codigo;
         Agencia = agencia;
@@ -12,9 +12,14 @@ public class DadosBancarios : BaseEntity
         Digito = digito;
     }
 
-    public string Codigo { get; private set; }
-    public string Agencia { get; private set; }
-    public string Conta { get; private set; }
-    public string Digito { get; private set; }
+    public DadosBancarios() : base()
+    {
+        
+    }
+
+    public string Codigo { get;  set; }
+    public string Agencia { get; set; }
+    public string Conta { get; set; }
+    public string Digito { get;  set; }
    
 }

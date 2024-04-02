@@ -2,13 +2,18 @@ namespace TesteFrogpay.Domain.Entities;
 
 public abstract class BaseEntity
 {
-    protected BaseEntity(Guid id, DateTime dataCriacao)
+    protected BaseEntity(DateTime dataCriacao)
     {
-        Id = id;
+        Id = Guid.NewGuid();
         DataCriacao = dataCriacao;
     }
 
-    public Guid Id { get; private set; }
-    public DateTime DataCriacao { get; private set; }
+    public BaseEntity()
+    {
+        
+    }
+
+    public Guid Id { get; set; }
+    public DateTime DataCriacao { get; set; }
 
 }
