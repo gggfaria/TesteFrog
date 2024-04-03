@@ -49,6 +49,8 @@ builder.Services.AddSingleton<DbContext>
     (_ => new DbContext(builder.Configuration.GetConnectionString("SqlConnection")));
 
 builder.Services.AddScoped<IPessoaRepository, PessoaRepository>();
+builder.Services.AddScoped<ILojaRepository, LojaRepository>();
+
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<PessoaService>();
 
