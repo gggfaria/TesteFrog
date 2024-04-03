@@ -34,9 +34,26 @@ public class PessoasController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "ADMIN")]
     public async Task<ActionResult> Post([FromBody] CreatePessoaDto dto)
     {
         var resultado = await _pessoaService.Adicionar(dto);
+        return StatusCode(resultado.Status, resultado);
+    }
+    
+    [HttpPut]
+    [Authorize(Roles = "ADMIN")]
+    public async Task<ActionResult> Put([FromBody] UpdatePessoaDto dto)
+    {
+        var resultado = await _pessoaService.Atualizar(dto);
+        return StatusCode(resultado.Status, resultado);
+    }
+    
+    [HttpDelete("{id:guid}")]
+    [Authorize(Roles = "ADMIN")]
+    public async Task<ActionResult> Delete(Guid id)
+    {
+        var resultado = await _pessoaService.Deletar(id);
         return StatusCode(resultado.Status, resultado);
     }
 }

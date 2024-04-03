@@ -8,5 +8,7 @@ public interface IPessoaRepository
     Task<IEnumerable<Pessoa?>> SelecionarTodos();
     Task<Pessoa> Selecionar(Guid id);
     Task<Pessoa> SelecionarLogin(string usuario);
+    Task<int?> Deletar(Guid id);
+    Task<int?> Atualizar(Pessoa pessoa);
 
 }

@@ -40,14 +40,36 @@ public class PessoaService
     {
         var pessoa = _mapper.Map<Pessoa>(dto);
         var resposta = await _pessoaRepository.Adicionar(pessoa);
-        var viewPessoa = _mapper.Map<ViewPessoaDto>(pessoa);
 
         if (resposta != 1)
             return new ResponseDto<ViewPessoaDto>((int)HttpStatusCode.InternalServerError, "Erro ao criar novo usuário");
         else
         {
+            var viewPessoa = _mapper.Map<ViewPessoaDto>(pessoa);
             return new ResponseDto<ViewPessoaDto>((int) HttpStatusCode.Created, viewPessoa);
         }
+    }
+    
+    public async Task<ResponseDto<ViewPessoaDto>> Atualizar(UpdatePessoaDto dto)
+    {
+        var pessoa = _mapper.Map<Pessoa>(dto);
+        var resposta = await _pessoaRepository.Atualizar(pessoa);
 
+        if (resposta != 1)
+            return new ResponseDto<ViewPessoaDto>((int)HttpStatusCode.InternalServerError, "Erro ao atualizar usuário");
+        else
+        {
+            var viewPessoa = _mapper.Map<ViewPessoaDto>(pessoa);
+            return new ResponseDto<ViewPessoaDto>((int) HttpStatusCode.OK, viewPessoa);
+        }
+    }
+    
+    public async Task<ResponseDto<bool>> Deletar(Guid id)
+    {
+        var resultado = await _pessoaRepository.Deletar(id);
+        if (resultado != 1)
+            return new ResponseDto<bool>((int)HttpStatusCode.NotFound, "Não foi possível excluir por esse código");
+        
+        return new ResponseDto<bool>((int)HttpStatusCode.OK, true);
     }
 }

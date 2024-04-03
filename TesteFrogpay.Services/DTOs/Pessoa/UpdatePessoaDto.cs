@@ -1,11 +1,17 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace TesteFrogpay.Services.DTOs.Pessoa;
 
-public class CreatePessoaDto
+public class UpdatePessoaDto
 {
-    public string Usuario { get; set; }
-    public string Senha { get; set; }
+    [Required]
+    public Guid Id { get; set; }
+    [Required]
     public string Nome { get; set; }
+    [Required]
     public string Cpf { get; set; }
+    [Required]
     public DateTime DataNascimento { get; set; }
+    [Required]
     public string Permissao { get; set; }
 }

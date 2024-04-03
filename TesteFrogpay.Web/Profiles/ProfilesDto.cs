@@ -13,6 +13,7 @@ public class ProfilesDto : Profile
         
         //dto to doamin
         CreateMap<CreatePessoaDto, Pessoa>();
+        CreateMap<UpdatePessoaDto, Pessoa>();
 
     }
 }

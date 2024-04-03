@@ -21,6 +21,38 @@ public class PessoaRepository : IPessoaRepository
         connection.Close();
         return result;
     }
+    
+    public async Task<int?> Atualizar(Pessoa pessoa)
+    {
+        using  var connection = _dbContext.CreateConnection();
+        var result = await connection.ExecuteAsync(@"
+                    update tb_pessoa
+                    set nome = @Nome,
+                        cpf = @Cpf,
+                        data_nascimento = @DataNascimento,
+                        ativo = @EstaAtivo,
+                        permissao = @Permissao
+                    where
+                        id = @Id;
+                ",
+            pessoa);
+        connection.Close();
+        return result;
+    }
+    
+    public async Task<int?> Deletar(Guid id)
+    {
+        using  var connection = _dbContext.CreateConnection();
+        var result = await connection.ExecuteAsync(@"  
+                delete
+                from tb_pessoa
+                where
+                    id = @Id;
+                ",
+            new {id});
+        connection.Close();
+        return result;
+    }
 
     public async Task<IEnumerable<Pessoa?>> SelecionarTodos()
     {
@@ -68,4 +100,6 @@ public class PessoaRepository : IPessoaRepository
         connection.Close();
         return result;
     }
+    
+    
 }
