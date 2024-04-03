@@ -50,6 +50,7 @@ builder.Services.AddSingleton<DbContext>
 
 builder.Services.AddScoped<IPessoaRepository, PessoaRepository>();
 builder.Services.AddScoped<ILojaRepository, LojaRepository>();
+builder.Services.AddScoped<IDadosBancariosRespository, DadosBancariosRepository>();
 
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<PessoaService>();
