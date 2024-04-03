@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TesteFrogpay.Services.DTOs;
 using TesteFrogpay.Services.DTOs.Pessoa;
 using TesteFrogpay.Services.Services;
 
@@ -18,10 +19,10 @@ public class PessoasController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult> Get()
+    public async Task<ActionResult> Get([FromQuery] PaginacaoDto paginacao)
     {
-        var resultado = await _pessoaService.SelecionarTodos();
-        if (resultado?.Count() == 0)
+        var resultado = await _pessoaService.SelecionarTodos(paginacao);
+        if (resultado?.DadosPagina?.Count() == 0)
             return NoContent();
         return Ok(resultado);
     }

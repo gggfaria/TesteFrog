@@ -54,6 +54,29 @@ public class PessoaRepository : IPessoaRepository
         return result;
     }
 
+    public async Task<IEnumerable<Pessoa?>> SelecionarTodos(int numeroPagina, int tamanho)
+    {
+        using  var connection = _dbContext.CreateConnection();
+        var result = await connection.QueryAsync<Pessoa>(@"
+                        select id,
+                            nome,
+                            cpf,
+                            data_nascimento as dataNascimento,
+                            ativo as estaAtivo,
+                            data_criacao as dataCriacao
+                        from tb_pessoa
+                        OFFSET @Offset
+                        FETCH NEXT @tamanho ROWS ONLY;
+                    ", new
+        {
+            Offset = (numeroPagina-1) * tamanho,
+            tamanho
+        });
+        connection.Close();
+        return result;
+    }
+    
+    
     public async Task<IEnumerable<Pessoa?>> SelecionarTodos()
     {
         using  var connection = _dbContext.CreateConnection();

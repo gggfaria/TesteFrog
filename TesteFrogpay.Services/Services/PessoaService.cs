@@ -27,13 +27,13 @@ public class PessoaService
         return new ResponseDto<ViewPessoaDto>((int)HttpStatusCode.OK, dto);
     }
 
-    //todo paginacao
-    public async Task<IEnumerable<ViewPessoaDto>> SelecionarTodos()
+    public async Task<ListaPaginadaDto<IEnumerable<ViewPessoaDto>>> SelecionarTodos(PaginacaoDto paginacao)
     {
-        var pessoas = await _pessoaRepository.SelecionarTodos();
+        var pessoas = await _pessoaRepository.SelecionarTodos(paginacao.NumeroPagina, paginacao.TamanhoPorPagina);
+        
         var dto = _mapper.Map<IEnumerable<ViewPessoaDto>>(pessoas);
 
-        return dto;
+        return new ListaPaginadaDto<IEnumerable<ViewPessoaDto>>(dto, paginacao);
     }
 
     public async Task<ResponseDto<ViewPessoaDto>> Adicionar(CreatePessoaDto dto)
