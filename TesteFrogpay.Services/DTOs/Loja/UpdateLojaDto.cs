@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace TesteFrogpay.Services.DTOs.Loja;
 
 public class UpdateLojaDto
