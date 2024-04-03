@@ -55,6 +55,11 @@ builder.Services.AddScoped<IEnderecoRepository, EnderecoRepository>();
 
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<PessoaService>();
+builder.Services.AddScoped<LojaService>();
+builder.Services.AddScoped<EnderecoService>();
+builder.Services.AddScoped<DadosBancariosRepository>();
+
+
 
 builder.Services.AddSingleton<JwtInjection>
     (

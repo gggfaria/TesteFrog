@@ -1,18 +1,19 @@
-namespace TesteFrogpay.Domain.Entities;
+using System.ComponentModel.DataAnnotations;
 
-public class Endereco : BaseEntity
+namespace TesteFrogpay.Services.DTOs.Endereco;
+
+public class CreateEnderecoDto
 {
- 
-
-    public Endereco() : base()
-    {
-    }
-
-    public Guid PessoaId { get; set; }
+    [Required]
     public string UF { get; set; }
+    [Required]
     public string Cidade { get; set; }
+    [Required]
     public string Bairro { get; set; }
+    [Required]
     public string Logradouro { get; set; }
+    [Required]
     public string Numero { get; set; }
+    [Required]
     public string Complemento { get; set; }
 }
