@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TesteFrogpay.Domain.Interfaces;
 
@@ -5,6 +6,7 @@ namespace TesteFrogpay.Web.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+[Authorize(Roles = "PADRAO")]
 public class PessoasController : ControllerBase
 {
     private readonly IPessoaRepository _pessoaRepository;

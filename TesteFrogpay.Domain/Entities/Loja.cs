@@ -2,15 +2,6 @@ namespace TesteFrogpay.Domain.Entities;
 
 public class Loja : BaseEntity
 {
-    public Loja(Guid id, DateTime dataCriacao, Guid pessoaId, string nomeFantasia, string razaoSocial,
-        DateTime dataAbertura) : base(dataCriacao)
-    {
-        PessoaId = pessoaId;
-        NomeFantasia = nomeFantasia;
-        RazaoSocial = razaoSocial;
-        DataAbertura = dataAbertura;
-    }
-
     public Loja() : base()
     {
     }

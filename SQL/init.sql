@@ -5,7 +5,10 @@ create table tb_pessoa
     cpf             varchar            not null,
     data_nascimento date            not null,
     ativo           boolean            not null,
-    data_criacao    date default now() not null
+    data_criacao    date default now() not null,
+    usuario         varchar not null,
+    senha           varchar not null,
+    permissao       varchar
 );
 
 create table tb_endereco

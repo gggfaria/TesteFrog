@@ -5,7 +5,7 @@
       context: .
       dockerfile: TesteFrogpay.Web/Dockerfile
     ports:
-      - "443:443"
+      - "80:80"
     depends_on:
       - "postgres"
     networks:

@@ -7,6 +7,9 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["TesteFrogpay.Web/TesteFrogpay.Web.csproj", "TesteFrogpay.Web/"]
+COPY ["TesteFrogpay.Domain/TesteFrogpay.Domain.csproj", "TesteFrogpay.Domain/"]
+COPY ["TesteFrogpay.Infra/TesteFrogpay.Infra.csproj", "TesteFrogpay.Infra/"]
+COPY ["TesteFrogpay.Services/TesteFrogpay.Services.csproj", "TesteFrogpay.Services/"]
 RUN dotnet restore "TesteFrogpay.Web/TesteFrogpay.Web.csproj"
 COPY . .
 WORKDIR "/src/TesteFrogpay.Web"
