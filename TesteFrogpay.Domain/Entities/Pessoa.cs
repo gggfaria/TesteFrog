@@ -9,13 +9,14 @@ public class Pessoa : BaseEntity
     public Pessoa() : base()
     {
     }
+    
 
     public string Usuario { get; set; }
     public string Senha { get; set; }
     public string Nome { get; set; }
     public string Cpf { get; set; }
     public DateTime DataNascimento { get; set; }
-    public bool EstaAtivo { get; set; }
+    public bool EstaAtivo { get; set; } = true;
 
     private string _permissao;
 
@@ -27,7 +28,7 @@ public class Pessoa : BaseEntity
             if (PERMISSOES.Contains(value))
                 _permissao = value;
             else
-                throw new ArgumentException("Permissao não é válida");
+                throw new ArgumentException("Permissão não é válida");
         }
     }
 }

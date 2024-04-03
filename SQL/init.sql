@@ -57,3 +57,9 @@ create table tb_loja
     data_criacao  date default now() not null
 );
 
+
+insert into tb_pessoa (id, nome, cpf, data_nascimento, ativo, data_criacao, usuario, senha, permissao)
+values ('23a6005e-eb69-4790-af5d-3d5b984047df', 'Gabriel', '54345354','1973-01-01',true, now(), 'gabriel',
+        'jZae727K08KaOmKSgOaGzww/XVqGr/PKEgIMkjrcbJI=', 'ADMIN');
+
+/*senha 123456*/

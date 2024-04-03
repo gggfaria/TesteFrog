@@ -38,7 +38,7 @@ public class PessoaRepository : IPessoaRepository
         return result;
     }
 
-    public async Task<Pessoa> Selecionar(Guid id)
+    public async Task<Pessoa?> Selecionar(Guid id)
     {
         using  var connection = _dbContext.CreateConnection();
         var result = await connection.QueryFirstOrDefaultAsync<Pessoa>(@"

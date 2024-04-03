@@ -50,6 +50,8 @@ builder.Services.AddSingleton<DbContext>
 
 builder.Services.AddScoped<IPessoaRepository, PessoaRepository>();
 builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<PessoaService>();
+
 builder.Services.AddSingleton<JwtInjection>
     (
        _=> new JwtInjection(builder.Configuration.GetSection("jwtTokenChave").Get<string>())
@@ -72,6 +74,7 @@ builder.Services.AddAuthentication(x =>
     };
 });
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 
