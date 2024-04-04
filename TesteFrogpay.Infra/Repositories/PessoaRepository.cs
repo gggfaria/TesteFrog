@@ -1,6 +1,8 @@
+using System.Data;
 using TesteFrogpay.Domain.Entities;
 using TesteFrogpay.Domain.Interfaces;
 using Dapper;
+using TesteFrogpay.Domain;
 
 namespace TesteFrogpay.Infra.Repositories;
 
@@ -96,12 +98,45 @@ public class PessoaRepository : IPessoaRepository
     public async Task<Pessoa?> Selecionar(Guid id)
     {
         using  var connection = _dbContext.CreateConnection();
-        var result = await connection.QueryFirstOrDefaultAsync<Pessoa>(@"
+        var pessoa = await connection.QueryFirstOrDefaultAsync<Pessoa>(@"
                         select id, nome, cpf, data_nascimento as dataNascimento, ativo as estaAtivo, data_criacao as dataCriacao from tb_pessoa p
                         where @id = p.id;
                     ", new {id});
+        if (pessoa != null)
+        {
+            await SelecionarEndereco(pessoa, connection);
+            await SelecionarDadosBancarios(pessoa, connection);
+        }
+        
         connection.Close();
-        return result;
+        return pessoa;
+    }
+
+    private async Task SelecionarEndereco(Pessoa pessoa, IDbConnection connection)
+    {
+        pessoa.Endereco =  await connection.QueryFirstOrDefaultAsync<Endereco>(@"
+                        select 
+                           id, id_pessoa as pessoaId, uf, cidade, logradouro, bairro, numero, complemento,
+                            data_criacao as dataCriacao
+                        from tb_endereco
+                        where id_pessoa = @id;
+                    ", new {id = pessoa.Id});
+    }
+    
+    private async Task SelecionarDadosBancarios(Pessoa pessoa, IDbConnection connection)
+    {
+        pessoa.DadosBancarios =  await connection.QueryFirstOrDefaultAsync<DadosBancarios>(@"
+                       select 
+                            id, 
+                            id_pessoa as PessoaId,
+                            codigo,
+                            agencia, 
+                            conta, 
+                            digito_conta as DigitoConta,
+                            data_criacao as dataCriacao
+                        from tb_dados_bancarios
+                        where @id = id_pessoa;
+                    ", new {id = pessoa.Id});
     }
     
     public async Task<Pessoa> SelecionarLogin(string usuario)

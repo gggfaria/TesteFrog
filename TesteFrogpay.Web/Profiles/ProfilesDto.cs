@@ -17,6 +17,8 @@ public class ProfilesDto : Profile
         CreateMap<Loja, ViewLojaDto>();
         CreateMap<Endereco, ViewEnderecoDto>();
         CreateMap<DadosBancarios, ViewDadosBancariosDto>();
+        CreateMap<Pessoa, ViewPessoaDadosBancariosEnderecoDto>();
+        
 
         //dto to doamin
         CreateMap<CreatePessoaDto, Pessoa>();

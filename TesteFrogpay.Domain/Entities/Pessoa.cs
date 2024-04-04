@@ -17,6 +17,10 @@ public class Pessoa : BaseEntity
     public string Cpf { get; set; }
     public DateTime DataNascimento { get; set; }
     public bool EstaAtivo { get; set; } = true;
+    
+    
+    public DadosBancarios DadosBancarios { get; set; }
+    public Endereco Endereco { get; set; }
 
     private string _permissao;
 

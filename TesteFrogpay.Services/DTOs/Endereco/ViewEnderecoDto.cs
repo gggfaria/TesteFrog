@@ -2,6 +2,7 @@ namespace TesteFrogpay.Services.DTOs.Endereco;
 
 public class ViewEnderecoDto
 {
+    public Guid PessoaId { get; set; }
 
     public Guid Id { get; set; }
 

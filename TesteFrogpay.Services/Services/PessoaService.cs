@@ -18,13 +18,13 @@ public class PessoaService
         _mapper = mapper;
     }
 
-    public async Task<ResponseDto<ViewPessoaDto>> SelecionarPorId(Guid id)
+    public async Task<ResponseDto<ViewPessoaDadosBancariosEnderecoDto>> SelecionarPorId(Guid id)
     {
         var pessoa = await _pessoaRepository.Selecionar(id);
         if (pessoa == null)
-            return new ResponseDto<ViewPessoaDto>((int)HttpStatusCode.NotFound, "Nenhuma pessoa encontrada com esse código");
-        var dto = _mapper.Map<ViewPessoaDto>(pessoa);
-        return new ResponseDto<ViewPessoaDto>((int)HttpStatusCode.OK, dto);
+            return new ResponseDto<ViewPessoaDadosBancariosEnderecoDto>((int)HttpStatusCode.NotFound, "Nenhuma pessoa encontrada com esse código");
+        var dto = _mapper.Map<ViewPessoaDadosBancariosEnderecoDto>(pessoa);
+        return new ResponseDto<ViewPessoaDadosBancariosEnderecoDto>((int)HttpStatusCode.OK, dto);
     }
 
     public async Task<ListaPaginadaDto<IEnumerable<ViewPessoaDto>>> SelecionarTodos(PaginacaoDto paginacao)

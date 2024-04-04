@@ -5,6 +5,8 @@ namespace TesteFrogpay.Services.DTOs.Endereco;
 public class CreateEnderecoDto
 {
     [Required]
+    public Guid PessoaId { get; set; }
+    [Required]
     public string UF { get; set; }
     [Required]
     public string Cidade { get; set; }
@@ -14,6 +16,6 @@ public class CreateEnderecoDto
     public string Logradouro { get; set; }
     [Required]
     public string Numero { get; set; }
-    [Required]
+
     public string Complemento { get; set; }
 }
