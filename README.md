@@ -39,5 +39,18 @@ f) Orquestrar a solução final utilizando Docker Compose de modo que inclua tod
 contêineres utilizados;
 - Utilizar comando do docker para subir os containers e executar.
 
+g) Criar um endpoint que permita consultar os dados bancário e endereço da pessoa pelo
+atributo do “id_pessoa”;
+- GET pessoas por Id retorna todos os endereços e dados bancários da pessoa;
+  
+h) Criar um endpoint que permita consultar o endereço a partir de uma parte do nome da
+pessoa.
+- GET /Endereco/pessoanome
+
+
+
+
+
+
   
 
