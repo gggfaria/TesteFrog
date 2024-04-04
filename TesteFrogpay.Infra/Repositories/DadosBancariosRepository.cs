@@ -30,7 +30,7 @@ public class DadosBancariosRepository : IDadosBancariosRespository
         using  var connection = _dbContext.CreateConnection();
         var result = await connection.ExecuteAsync(@"
                     update tb_dados_bancarios
-                    set pessoa_id = @PessoaId,
+                    set id_pessoa = @PessoaId,
                         codigo = @Codigo,
                         agencia = @Agencia,
                         conta = @Conta,
@@ -88,7 +88,7 @@ public class DadosBancariosRepository : IDadosBancariosRespository
                             digito_conta as DigitoConta,
                             data_criacao as dataCriacao
                         from tb_dados_bancarios d
-                        where @id = d.id;
+                        where id = @id;
                     ", new {id});
         connection.Close();
         return result;
