@@ -108,7 +108,6 @@ public class PessoaRepository : IPessoaRepository
             await SelecionarDadosBancarios(pessoa, connection);
         }
         
-        connection.Close();
         return pessoa;
     }
 
@@ -120,7 +119,6 @@ public class PessoaRepository : IPessoaRepository
                         select id, nome, cpf, data_nascimento as dataNascimento, ativo as estaAtivo, data_criacao as dataCriacao from tb_pessoa p
                         where lower(nome) like @nomeLike;
                     ", new {nomeLike});
-        connection.Close();
         return pessoa;
     }
     
@@ -167,7 +165,6 @@ public class PessoaRepository : IPessoaRepository
                         from tb_pessoa p
                         where @usuario = p.usuario;
                     ", new {usuario});
-        connection.Close();
         return result;
     }
     

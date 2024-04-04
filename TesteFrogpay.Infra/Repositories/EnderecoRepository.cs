@@ -20,7 +20,6 @@ public class EnderecoRepository : IEnderecoRepository
                 insert into tb_endereco (id, id_pessoa, uf, cidade, logradouro, bairro, numero, complemento)
                 values (@Id, @PessoaId, @UF, @Cidade, @Logradouro, @Bairro, @Numero, @Complemento);
             ", endereco);
-        connection.Close();
         return result;
     }
     
@@ -40,7 +39,6 @@ public class EnderecoRepository : IEnderecoRepository
                         id = @Id;
                 ",
             endereco);
-        connection.Close();
         return result;
     }
     
@@ -54,7 +52,6 @@ public class EnderecoRepository : IEnderecoRepository
                     id = @Id;
                 ",
             new {id});
-        connection.Close();
         return result;
     }
 
@@ -67,7 +64,6 @@ public class EnderecoRepository : IEnderecoRepository
                             data_criacao as dataCriacao
                         from tb_endereco
                     ");
-        connection.Close();
         return result;
     }
 
@@ -81,7 +77,6 @@ public class EnderecoRepository : IEnderecoRepository
                         from tb_endereco
                         where id = @id;
                     ", new {id});
-        connection.Close();
         return result;
     }
 
@@ -95,7 +90,6 @@ public class EnderecoRepository : IEnderecoRepository
                         from tb_endereco
                         where id_pessoa = @id;
                     ", new {id});
-        connection.Close();
         return result;
     }
 }

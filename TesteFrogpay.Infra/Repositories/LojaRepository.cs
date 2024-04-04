@@ -20,7 +20,6 @@ public class LojaRepository : ILojaRepository
                 insert into tb_loja (id, pessoa_id, nome_fantasia, razao_social, cnpj, data_abertura)
                 values (@Id, @PessoaId, @NomeFantasia, @RazaoSocial, @Cnpj, @DataAbertura);
             ", loja);
-        connection.Close();
         return result;
     }
     
@@ -38,7 +37,6 @@ public class LojaRepository : ILojaRepository
                         id = @Id;
                 ",
             loja);
-        connection.Close();
         return result;
     }
     
@@ -52,7 +50,6 @@ public class LojaRepository : ILojaRepository
                     id = @Id;
                 ",
             new {id});
-        connection.Close();
         return result;
     }
 
@@ -70,7 +67,6 @@ public class LojaRepository : ILojaRepository
                             data_criacao as dataCriacao
                         from tb_loja
                     ");
-        connection.Close();
         return result;
     }
 
@@ -89,7 +85,6 @@ public class LojaRepository : ILojaRepository
                         from tb_loja l
                         where @id = l.id;
                     ", new {id});
-        connection.Close();
         return result;
     }
      

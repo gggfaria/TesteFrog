@@ -6,9 +6,8 @@ namespace TesteFrogpay.Infra.Repositories;
 
 public class DadosBancariosRepository : IDadosBancariosRespository
 {
-    
     private readonly DbContext _dbContext;
-    
+
     public DadosBancariosRepository(DbContext dbContext)
     {
         _dbContext = dbContext;
@@ -16,18 +15,17 @@ public class DadosBancariosRepository : IDadosBancariosRespository
 
     public async Task<int?> Adicionar(DadosBancarios dadosBancarios)
     {
-        using  var connection = _dbContext.CreateConnection();
+        using var connection = _dbContext.CreateConnection();
         var result = await connection.ExecuteAsync(@"
                 insert into tb_dados_bancarios (id, id_pessoa, codigo, agencia, conta, digito_conta)
                 values (@Id, @PessoaId, @Codigo, @Agencia, @Conta, @DigitoConta);
             ", dadosBancarios);
-        connection.Close();
         return result;
     }
-    
+
     public async Task<int?> Atualizar(DadosBancarios dadosBancarios)
     {
-        using  var connection = _dbContext.CreateConnection();
+        using var connection = _dbContext.CreateConnection();
         var result = await connection.ExecuteAsync(@"
                     update tb_dados_bancarios
                     set id_pessoa = @PessoaId,
@@ -39,27 +37,25 @@ public class DadosBancariosRepository : IDadosBancariosRespository
                         id = @Id;
                 ",
             dadosBancarios);
-        connection.Close();
         return result;
     }
-    
+
     public async Task<int?> Deletar(Guid id)
     {
-        using  var connection = _dbContext.CreateConnection();
+        using var connection = _dbContext.CreateConnection();
         var result = await connection.ExecuteAsync(@"  
                 delete
                 from tb_dados_bancarios
                 where
                     id = @Id;
                 ",
-            new {id});
-        connection.Close();
+            new { id });
         return result;
     }
 
     public async Task<IEnumerable<DadosBancarios?>> SelecionarTodos()
     {
-        using  var connection = _dbContext.CreateConnection();
+        using var connection = _dbContext.CreateConnection();
         var result = await connection.QueryAsync<DadosBancarios>(@"
                         select 
                             id, 
@@ -71,13 +67,12 @@ public class DadosBancariosRepository : IDadosBancariosRespository
                             data_criacao as dataCriacao
                         from tb_dados_bancarios
                     ");
-        connection.Close();
         return result;
     }
 
     public async Task<DadosBancarios?> Selecionar(Guid id)
     {
-        using  var connection = _dbContext.CreateConnection();
+        using var connection = _dbContext.CreateConnection();
         var result = await connection.QueryFirstOrDefaultAsync<DadosBancarios>(@"
                      select 
                             id, 
@@ -89,8 +84,7 @@ public class DadosBancariosRepository : IDadosBancariosRespository
                             data_criacao as dataCriacao
                         from tb_dados_bancarios d
                         where id = @id;
-                    ", new {id});
-        connection.Close();
+                    ", new { id });
         return result;
     }
 }
