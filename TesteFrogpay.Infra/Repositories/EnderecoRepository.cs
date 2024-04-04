@@ -84,4 +84,18 @@ public class EnderecoRepository : IEnderecoRepository
         connection.Close();
         return result;
     }
+
+    public async Task<IEnumerable<Endereco?>> SelecionarPessoaId(Guid id)
+    {
+        using  var connection = _dbContext.CreateConnection();
+        var result = await connection.QueryAsync<Endereco>(@"
+                        select 
+                           id, id_pessoa as pessoaId, uf, cidade, logradouro, bairro, numero, complemento,
+                            data_criacao as dataCriacao
+                        from tb_endereco
+                        where id_pessoa = @id;
+                    ", new {id});
+        connection.Close();
+        return result;
+    }
 }

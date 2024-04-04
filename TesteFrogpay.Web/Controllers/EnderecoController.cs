@@ -23,6 +23,14 @@ public class EnderecoController : Controller
         var resultado = await _enderecoService.SelecionarTodos();
         return StatusCode(resultado.Status, resultado);
     }
+    
+    
+    [HttpGet("pessoanome")]
+    public async Task<ActionResult> Get([FromQuery] string pessoaNome)
+    {
+        var resultado = await _enderecoService.SelecionarEnderecoPorNomePessoa(pessoaNome);
+        return StatusCode(resultado.Status, resultado);
+    }
 
     [HttpGet("{id:guid}")]
     public async Task<ActionResult> Get(Guid id)

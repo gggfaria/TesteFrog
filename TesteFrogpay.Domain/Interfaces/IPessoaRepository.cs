@@ -11,5 +11,6 @@ public interface IPessoaRepository
     Task<int?> Deletar(Guid id);
     Task<int?> Atualizar(Pessoa pessoa);
     Task<IEnumerable<Pessoa?>> SelecionarTodos(int NumeroPagina, int tamanho);
+    Task<Pessoa?> SelecionarPorNome(string nome);
 
 }

@@ -4,18 +4,21 @@ using TesteFrogpay.Domain.Entities;
 using TesteFrogpay.Domain.Interfaces;
 using TesteFrogpay.Services.DTOs;
 using TesteFrogpay.Services.DTOs.Endereco;
+using TesteFrogpay.Services.DTOs.Pessoa;
 
 namespace TesteFrogpay.Services.Services;
 
 public class EnderecoService
 {
     private readonly IEnderecoRepository _enderecoRepository;
+    private readonly IPessoaRepository _pessoaRepository;
     private readonly IMapper _mapper;
 
-    public EnderecoService(IMapper mapper, IEnderecoRepository enderecoRepository)
+    public EnderecoService(IMapper mapper, IEnderecoRepository enderecoRepository, IPessoaRepository pessoaRepository)
     {
         _mapper = mapper;
         _enderecoRepository = enderecoRepository;
+        _pessoaRepository = pessoaRepository;
     }
 
     public async Task<ResponseDto<ViewEnderecoDto>> SelecionarPorId(Guid id)
@@ -72,4 +75,21 @@ public class EnderecoService
 
         return new ResponseDto<bool>((int)HttpStatusCode.OK, true);
     }
+
+    public async Task<ResponseDto<ViewEnderecoPessoaDto>> SelecionarEnderecoPorNomePessoa(string nome)
+    {
+        var pessoa = await _pessoaRepository.SelecionarPorNome(nome);
+        var enderecos = pessoa == null ? null : await _enderecoRepository.SelecionarPessoaId(pessoa.Id);
+        if (pessoa == null || enderecos?.Count() < 1)
+            return new ResponseDto<ViewEnderecoPessoaDto>((int)HttpStatusCode.NoContent, "Não encontrado");
+
+        var viewEnderecoPessoa = new ViewEnderecoPessoaDto();
+        viewEnderecoPessoa.Enderecos = _mapper.Map<IEnumerable<ViewEnderecoDto>>(enderecos);
+        viewEnderecoPessoa.Pessoa = _mapper.Map<ViewPessoaDto>(pessoa);
+        
+        return new ResponseDto<ViewEnderecoPessoaDto>((int) HttpStatusCode.OK, viewEnderecoPessoa);
+
+    }
+    
+    
 }

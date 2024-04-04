@@ -112,6 +112,18 @@ public class PessoaRepository : IPessoaRepository
         return pessoa;
     }
 
+    public async Task<Pessoa?> SelecionarPorNome(string nome)
+    {
+        var nomeLike = $"%{nome?.ToLower()}%"; 
+        using  var connection = _dbContext.CreateConnection();
+        var pessoa = await connection.QueryFirstOrDefaultAsync<Pessoa>(@"
+                        select id, nome, cpf, data_nascimento as dataNascimento, ativo as estaAtivo, data_criacao as dataCriacao from tb_pessoa p
+                        where lower(nome) like @nomeLike;
+                    ", new {nomeLike});
+        connection.Close();
+        return pessoa;
+    }
+    
     private async Task SelecionarEndereco(Pessoa pessoa, IDbConnection connection)
     {
         pessoa.Endereco =  await connection.QueryFirstOrDefaultAsync<Endereco>(@"
